@@ -38,15 +38,15 @@ class _TasklistState extends State<Tasklist> {
           ),
         ),
       const AllTaskwidget(),
-        ElevatedButton(
+        MaterialButton(
+          height: height*0.05,
+          minWidth: width*0.4,
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return const createTask();
               }));
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red.shade300,
-            ),
+            color: Colors.red.shade300,
             child: const Text(
               "Create Task",
               style: TextStyle(fontSize: 18, color: Colors.white),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/Tasklist.dart';
 
 class createTask extends StatefulWidget {
   const createTask({super.key});
@@ -8,6 +9,13 @@ class createTask extends StatefulWidget {
 }
 
 class _createTaskState extends State<createTask> {
+  void add_new_task(String name, String description, String day) {
+    allTasks.add([name, description, day]);
+  }
+
+  final _taskName = TextEditingController();
+  final _taskDescription = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,17 +29,15 @@ class _createTaskState extends State<createTask> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Column(
-           
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-           const Text(
-                        "Create new Task",
-                        style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-                        ),
-                      ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Text(
+              "Create new Task",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -39,13 +45,12 @@ class _createTaskState extends State<createTask> {
               "Main task name",
               style: TextStyle(fontSize: 20, color: Colors.red.shade300),
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _taskName,
+              decoration: const InputDecoration(
                 labelText: "Task",
                 border: OutlineInputBorder(
-                   borderSide: BorderSide(color: Colors.red)
-                ),
-                
+                    borderSide: BorderSide(color: Colors.red)),
               ),
             ),
             const SizedBox(
@@ -55,13 +60,12 @@ class _createTaskState extends State<createTask> {
               "Task Description",
               style: TextStyle(fontSize: 20, color: Colors.red.shade300),
             ),
-            const TextField(
-              decoration: InputDecoration(
+             TextField(
+              controller: _taskDescription,
+              decoration: const InputDecoration(
                 labelText: "First . . .",
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red)
-                ),
-                
+                    borderSide: BorderSide(color: Colors.red)),
               ),
             ),
             const SizedBox(
@@ -71,26 +75,29 @@ class _createTaskState extends State<createTask> {
               "Due date",
               style: TextStyle(fontSize: 20, color: Colors.red.shade300),
             ),
-            const Duedate(),
+             const Duedate(),
             const SizedBox(
               height: 10,
             ),
-             const TextField(
-              decoration: InputDecoration(
-                labelText: "Description",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red)
-                ),
-              ),),
-            const SizedBox(
-              height: 20,
-            ),
-          Center(
-            child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red.shade300,
-              foregroundColor: Colors.white,
-            ),child: const Text("Add Task")),
-          )
+            Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      add_new_task(_taskName.text, _taskDescription.text,"8/8/2023");
+                      
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                        return const Tasklist();
+                                      }));
+            
+                    });
+                    
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red.shade300,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text("Add Task")),
+            )
           ]),
         ),
       ),
@@ -100,7 +107,7 @@ class _createTaskState extends State<createTask> {
 
 class Duedate extends StatefulWidget {
   const Duedate({super.key});
-
+ 
   @override
   State<Duedate> createState() => _DuedateState();
 }
@@ -108,35 +115,33 @@ class Duedate extends StatefulWidget {
 class _DuedateState extends State<Duedate> {
   @override
   Widget build(BuildContext context) {
-    DateTime selected = DateTime.now();
+   DateTime selected = DateTime.now();
     var height = MediaQuery.of(context).size.height;
     return Container(
-      height: height*0.1,
-     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(5),
-      border: Border.all(
-        color: Colors.red.shade300,
-        width: 1,
-        
-      )
-     ),
+      height: height * 0.1,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: Colors.red.shade300,
+            width: 1,
+          )),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('${selected.day}-${selected.month}-${selected.year}'),
           ElevatedButton(
-            onPressed: () async {
-              final DateTime? date = await showDatePicker(
-                  context: context,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000));
-              if (date != null) {
-                setState(() {
-                  selected = date;
-                });
-              }
-            },
-            child: const Icon(Icons.calendar_month)),
+              onPressed: () async {
+                final DateTime? date = await showDatePicker(
+                    context: context,
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(3000));
+                if (date != null) {
+                  setState(() {
+                    selected = date;
+                  });
+                }
+              },
+              child: const Icon(Icons.calendar_month)),
         ],
       ),
     );

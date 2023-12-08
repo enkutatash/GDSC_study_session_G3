@@ -34,7 +34,7 @@ void main() async {
     print("Subtraction = $Sub");
     print("Product = $Pro");
     print("Division = $Div");
-  } catch (e) {
+  }catch (e) {
     print(e);
   }
 }
