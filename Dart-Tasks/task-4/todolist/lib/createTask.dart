@@ -15,6 +15,7 @@ class _createTaskState extends State<createTask> {
 
   final _taskName = TextEditingController();
   final _taskDescription = TextEditingController();
+  final DateTime selected = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class _createTaskState extends State<createTask> {
               "Task Description",
               style: TextStyle(fontSize: 20, color: Colors.red.shade300),
             ),
-             TextField(
+            TextField(
               controller: _taskDescription,
               decoration: const InputDecoration(
                 labelText: "First . . .",
@@ -75,7 +76,7 @@ class _createTaskState extends State<createTask> {
               "Due date",
               style: TextStyle(fontSize: 20, color: Colors.red.shade300),
             ),
-             const Duedate(),
+            Duedate(),
             const SizedBox(
               height: 10,
             ),
@@ -83,14 +84,14 @@ class _createTaskState extends State<createTask> {
               child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      add_new_task(_taskName.text, _taskDescription.text,"8/8/2023");
-                      
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                        return const Tasklist();
-                                      }));
-            
+                      add_new_task(_taskName.text, _taskDescription.text,
+                      '${selected?.day}-${selected?.month}-${selected?.year}');
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const Tasklist();
+                      }));
                     });
-                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade300,
@@ -107,41 +108,45 @@ class _createTaskState extends State<createTask> {
 
 class Duedate extends StatefulWidget {
   const Duedate({super.key});
- 
+
   @override
   State<Duedate> createState() => _DuedateState();
 }
 
 class _DuedateState extends State<Duedate> {
+   DateTime? select = DateTime.now();
+  Future<void> _selected(BuildContext context) async {
+    await showDatePicker(
+      context: context,
+      //initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2130),
+    ).then((value) {
+      setState(() {
+        select = value!;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-   DateTime selected = DateTime.now();
     var height = MediaQuery.of(context).size.height;
     return Container(
       height: height * 0.1,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(
-            color: Colors.red.shade300,
-            width: 1,
-          )),
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(
+          color: Colors.red.shade300,
+          width: 1,
+        ),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('${selected.day}-${selected.month}-${selected.year}'),
-          ElevatedButton(
-              onPressed: () async {
-                final DateTime? date = await showDatePicker(
-                    context: context,
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(3000));
-                if (date != null) {
-                  setState(() {
-                    selected = date;
-                  });
-                }
-              },
-              child: const Icon(Icons.calendar_month)),
+          Text('${select?.day}-${select?.month}-${select?.year}'),
+          IconButton(
+              onPressed: () => _selected(context),
+              icon: const Icon(Icons.calendar_month_outlined))
         ],
       ),
     );
