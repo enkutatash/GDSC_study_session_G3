@@ -17,6 +17,9 @@ class frontPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //SizedBox(height: height*0.7,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height*0.55,
+              child: Image.asset("image/front.jpg")),
             MaterialButton(
               minWidth: MediaQuery.of(context).size.width*0.4,
               height: MediaQuery.of(context).size.height*0.085,
@@ -25,7 +28,7 @@ class frontPage extends StatelessWidget {
                     return const Tasklist();
                   }));
                 },
-              color: Colors.red.shade300,
+              color: Colors.blue.shade300,
 
                 child: const Text("Get started",style: TextStyle(color: Colors.white),)),
           ],
