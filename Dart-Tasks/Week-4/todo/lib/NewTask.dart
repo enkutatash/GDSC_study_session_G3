@@ -9,7 +9,7 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
-   final _taskName = TextEditingController();
+  final _taskName = TextEditingController();
   final _taskDescription = TextEditingController();
   void new_task_create(String name, String description, String duedate) {
     allTasks.add([name, description, duedate]);
@@ -82,24 +82,21 @@ class _NewTaskState extends State<NewTask> {
             height: height * 0.02,
           ),
           Container(
-            height: height * 0.06,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
-                  BoxShadow(
-                      blurRadius: 5,
-                      spreadRadius: 4,
-                      color: Colors.black45,
-                      blurStyle: BlurStyle.outer)
-                ]),
-            child: TextField(
-              controller: _taskName,
-              decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Task Name"
-              ),
-            )
-          ),
+              height: height * 0.06,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: const [
+                    BoxShadow(
+                        blurRadius: 5,
+                        spreadRadius: 4,
+                        color: Colors.black45,
+                        blurStyle: BlurStyle.outer)
+                  ]),
+              child: TextField(
+                controller: _taskName,
+                decoration: const InputDecoration(
+                    border: InputBorder.none, hintText: "Task Name"),
+              )),
           SizedBox(
             height: height * 0.03,
           ),
@@ -176,9 +173,8 @@ class _NewTaskState extends State<NewTask> {
                 hintText: "First",
                 border: InputBorder.none,
               ),
-              ),
             ),
-          
+          ),
           SizedBox(
             height: height * 0.03,
           ),
@@ -188,11 +184,22 @@ class _NewTaskState extends State<NewTask> {
             height: height * 0.055,
             color: Colors.red.shade300,
             onPressed: () {
-              new_task_create(_taskName.text,_taskDescription.text, '${selected.day}-${selected.month}-${selected.year}');
-              Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const Taskslist();
-                      }));
+              new_task_create(_taskName.text, _taskDescription.text,
+                  '${selected.day}-${selected.month}-${selected.year}');
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const Taskslist();
+              }));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.red.shade800,
+                width: width*0.3,
+                  content: Text('${_taskName.text} added to your list',style:const TextStyle(fontSize: 20),),
+                  duration:const Duration(milliseconds: 3000),
+                  padding:const EdgeInsets.symmetric(horizontal: 8),
+                  behavior: SnackBarBehavior.floating,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  ));
             },
             child: const Text(
               "Add Task",
