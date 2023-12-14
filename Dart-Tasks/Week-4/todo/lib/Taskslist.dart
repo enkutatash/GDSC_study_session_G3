@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:todo/NewTask.dart';
 import 'package:todo/Task.dart';
 
-class Taskslist extends StatelessWidget {
+class Taskslist extends StatefulWidget {
   const Taskslist({super.key});
 
+  @override
+  State<Taskslist> createState() => _TaskslistState();
+}
+
+class _TaskslistState extends State<Taskslist> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -81,30 +87,34 @@ class Taskslist extends StatelessWidget {
   }
 }
 
-List allTasks = [
-  ["UX/Ui", "Description", "8/3/10"],
-  ["Reading", "Description", "8/3/10"],
-  ["Study", "Description", "8/3/10"],
-  ["Dart", "Description", "8/3/10"],
-  ["Dart", "Description", "8/3/10"],
-];
+Map<String,List<String>> allTasks = {
+  "UX/Ui": ["Description", "8/3/10", 'red'],
+  "Reading": ["Description", "8/3/10", 'red'],
+  "Study": ["Description", "8/3/10", 'green'],
+  "Dart": ["Description", "8/3/10", 'green'],
+  "Dart2": ["Description", "8/3/10",'green'],
+};
 
-class TaskWidget extends StatelessWidget {
+class TaskWidget extends StatefulWidget {
   const TaskWidget({super.key});
 
+  @override
+  State<TaskWidget> createState() => _TaskWidgetState();
+}
+class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     List<Widget> eachTask = [];
     var height = MediaQuery.of(context).size.height;
-    for (int i = 0; i < allTasks.length; i++) {
-      Widget one = Task(allTasks[i][0], allTasks[i][1], allTasks[i][2]);
+    allTasks.forEach((key, value) {
+      Widget one = Task(key, value[0], value[1], value[2]);
       eachTask.add(one);
       eachTask.add(
         SizedBox(
           height: height * 0.02,
         ),
       );
-    }
+    });
     return ListView(
       padding: const EdgeInsets.all(8),
       children: eachTask,

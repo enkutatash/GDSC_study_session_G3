@@ -11,8 +11,10 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   final _taskName = TextEditingController();
   final _taskDescription = TextEditingController();
-  void new_task_create(String name, String description, String duedate) {
-    allTasks.add([name, description, duedate]);
+  final String progress = 'red';
+  void new_task_create(
+      String name, String description, String duedate, String color) {
+    allTasks[name] = [description, duedate, color];
   }
 
   DateTime selected = DateTime.now();
@@ -50,7 +52,7 @@ class _NewTaskState extends State<NewTask> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
-        child: Column(children: [
+        child: ListView(children: [
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -184,28 +186,35 @@ class _NewTaskState extends State<NewTask> {
             height: height * 0.055,
             color: Colors.red.shade300,
             onPressed: () {
-              new_task_create(_taskName.text, _taskDescription.text,
-                  '${selected.day}-${selected.month}-${selected.year}');
+              new_task_create(
+                _taskName.text,
+                _taskDescription.text,
+                '${selected.day}-${selected.month}-${selected.year}',
+                progress,
+              );
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return const Taskslist();
               }));
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.red.shade800,
-                width: width*0.3,
-                  content: Text('${_taskName.text} added to your list',style:const TextStyle(fontSize: 20),),
-                  duration:const Duration(milliseconds: 3000),
-                  padding:const EdgeInsets.symmetric(horizontal: 8),
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  ));
+                backgroundColor: Colors.black38,
+                width: width * 0.7,
+                content: Text(
+                  '${_taskName.text} added to your list',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                duration: const Duration(milliseconds: 3000),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ));
             },
             child: const Text(
               "Add Task",
               style: TextStyle(color: Colors.white),
             ),
-          ))
+          )),
         ]),
       ),
     );

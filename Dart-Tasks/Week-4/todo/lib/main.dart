@@ -21,13 +21,19 @@ class Mainpage extends StatelessWidget {
   }
 }
 
-class Frontpage extends StatelessWidget {
+class Frontpage extends StatefulWidget {
   const Frontpage({super.key});
 
+  @override
+  State<Frontpage> createState() => _FrontpageState();
+}
+
+class _FrontpageState extends State<Frontpage> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+   
     return Scaffold(
       
       body: Container(
@@ -38,6 +44,7 @@ class Frontpage extends StatelessWidget {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+           
               Image.asset(
                 "image/todo.jpg",
                 width: width,
