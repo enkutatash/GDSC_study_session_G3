@@ -46,7 +46,9 @@ class Taskslist extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: height*0.008,),
+          SizedBox(
+            height: height * 0.008,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -84,7 +86,7 @@ List allTasks = [
   ["Reading", "Description", "8/3/10"],
   ["Study", "Description", "8/3/10"],
   ["Dart", "Description", "8/3/10"],
-  ["Dart","Description","8/3/10"],
+  ["Dart", "Description", "8/3/10"],
 ];
 
 class TaskWidget extends StatelessWidget {
@@ -103,8 +105,9 @@ class TaskWidget extends StatelessWidget {
         ),
       );
     }
-    return SingleChildScrollView(
-      child: Column(children: eachTask),
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: eachTask,
     );
   }
 }

@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:todo/Taskslist.dart';
 
-class NewTask extends StatelessWidget {
+class NewTask extends StatefulWidget {
   const NewTask({super.key});
+
+  @override
+  State<NewTask> createState() => _NewTaskState();
+}
+
+class _NewTaskState extends State<NewTask> {
+   final _taskName = TextEditingController();
+  final _taskDescription = TextEditingController();
+  void new_task_create(String name, String description, String duedate) {
+    allTasks.add([name, description, duedate]);
+  }
+
+  DateTime selected = DateTime.now();
+  Future<void> _selected(BuildContext context) async {
+    await showDatePicker(
+            context: context,
+            firstDate: DateTime.now(),
+            lastDate: DateTime(2040))
+        .then((value) {
+      setState(() {
+        selected = value!;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -56,7 +82,7 @@ class NewTask extends StatelessWidget {
             height: height * 0.02,
           ),
           Container(
-            height: height*0.06,
+            height: height * 0.06,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: const [
@@ -66,10 +92,13 @@ class NewTask extends StatelessWidget {
                       color: Colors.black45,
                       blurStyle: BlurStyle.outer)
                 ]),
-            child: const TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none, labelText: "Task Name"),
-            ),
+            child: TextField(
+              controller: _taskName,
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Task Name"
+              ),
+            )
           ),
           SizedBox(
             height: height * 0.03,
@@ -89,27 +118,31 @@ class NewTask extends StatelessWidget {
             height: height * 0.02,
           ),
           Container(
-            height: height*0.05,
+            height: height * 0.06,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              boxShadow:const [ BoxShadow(
-                color: Colors.black45,
-                spreadRadius: 4,
-                blurRadius: 5,
-                blurStyle: BlurStyle.outer,
-              )
-            ]),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                const Text("April 29/2023"),
-                IconButton(onPressed: (){}, icon:Icon(Icons.calendar_month,color: Colors.red.shade300,))
-              ],),
-            )
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black45,
+                    spreadRadius: 4,
+                    blurRadius: 5,
+                    blurStyle: BlurStyle.outer,
+                  )
+                ]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('${selected.day}-${selected.month}-${selected.year}'),
+                IconButton(
+                    onPressed: () => _selected(context),
+                    icon: Icon(
+                      Icons.calendar_month_outlined,
+                      color: Colors.red.shade300,
+                    ))
+              ],
+            ),
           ),
-           SizedBox(
+          SizedBox(
             height: height * 0.03,
           ),
           Row(
@@ -127,7 +160,7 @@ class NewTask extends StatelessWidget {
             height: height * 0.02,
           ),
           Container(
-            height: height*0.1,
+            height: height * 0.1,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: const [
@@ -137,15 +170,35 @@ class NewTask extends StatelessWidget {
                       color: Colors.black45,
                       blurStyle: BlurStyle.outer)
                 ]),
-            child: const TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none, labelText: "First...."),
+            child: TextField(
+              controller: _taskDescription,
+              decoration: const InputDecoration(
+                hintText: "First",
+                border: InputBorder.none,
+              ),
+              ),
             ),
-          ),
+          
           SizedBox(
             height: height * 0.03,
           ),
-          Center(child: MaterialButton(minWidth: width*0.45,height: height*0.055,color: Colors.red.shade300,onPressed: (){},child:const Text("Add Task",style: TextStyle(color: Colors.white),),))
+          Center(
+              child: MaterialButton(
+            minWidth: width * 0.45,
+            height: height * 0.055,
+            color: Colors.red.shade300,
+            onPressed: () {
+              new_task_create(_taskName.text,_taskDescription.text, '${selected.day}-${selected.month}-${selected.year}');
+              Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const Taskslist();
+                      }));
+            },
+            child: const Text(
+              "Add Task",
+              style: TextStyle(color: Colors.white),
+            ),
+          ))
         ]),
       ),
     );

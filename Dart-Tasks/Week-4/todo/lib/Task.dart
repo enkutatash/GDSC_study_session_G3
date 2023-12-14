@@ -15,64 +15,19 @@ class Task extends StatelessWidget {
           return Detail(name, description, duedate);
         }));
       },
-      child: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Container(
-          height: height * 0.07,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  spreadRadius: 5,
-                  blurRadius: 4,
-                  color: Colors.black45,
-                  blurStyle: BlurStyle.outer,
-                )
-              ]),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: width * 0.2,
-                child: Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      name[0],
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                )),
-              ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w400),
-                    ),
-                    const Spacer(
-                      flex: 2,
-                    ),
-                    Text(
-                      duedate,
-                      style: const TextStyle(fontSize: 10),
-                    ),
-                    VerticalDivider(
-                      thickness: 1.5,
-                      color: Colors.green.shade400,
-                    )
-                  ],
-                ),
-              )
-            ],
+      child: Card(
+        elevation: 2,
+        child: ListTile(
+          leading: Text(name[0], style:const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+          title: Row(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name, style:const TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+           const Spacer(flex: 2,),
+            Text(duedate,style: const TextStyle(fontSize: 10),),
+          ],
           ),
         ),
-      ),
+      )
     );
   }
 }
