@@ -19,7 +19,7 @@ class _MainBodyState extends State<MainBody> {
           Row(
             children: [
               Container(
-                width: width*0.75,
+                width: width*0.78,
                 height: height*0.05,
                 decoration: BoxDecoration(
                  borderRadius: BorderRadius.circular(20),
@@ -32,11 +32,15 @@ class _MainBodyState extends State<MainBody> {
                   ),
                 ),
               ),
-             SizedBox(width: width*0.05,),
+             SizedBox(width: width*0.03,),
               Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                   color: Colors.blue.shade600,
+                ),
                 width: width*0.09,
                 height: height*0.05,
-                color: Colors.blue.shade600,
+               
                 child:const Icon(Icons.menu,color: Colors.white,),
               )
             ],
