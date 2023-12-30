@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/Taskslist.dart';
-
+//import "package:todo/newTaskForm.dart";
+//import 'package:todo/NewTask.dart';
 void main() {
   runApp(const Mainpage());
 }
@@ -13,8 +14,8 @@ class Mainpage extends StatelessWidget {
     return MaterialApp(
       title: "Todolist",
       theme: ThemeData(
-        //useMaterial3: true,
-      ),
+          //useMaterial3: true,
+          ),
       debugShowCheckedModeBanner: false,
       home: Frontpage(),
     );
@@ -33,9 +34,8 @@ class _FrontpageState extends State<Frontpage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-   
+
     return Scaffold(
-      
       body: Container(
         color: Colors.red.shade300,
         child: Padding(
@@ -44,7 +44,6 @@ class _FrontpageState extends State<Frontpage> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-           
               Image.asset(
                 "image/todo.jpg",
                 width: width,
@@ -62,7 +61,10 @@ class _FrontpageState extends State<Frontpage> {
                 },
                 minWidth: width * 0.5,
                 height: height * 0.05,
-                child: const Text("Get started",style: TextStyle(color: Colors.white),),
+                child: const Text(
+                  "Get started",
+                  style: TextStyle(color: Colors.white),
+                ),
               )
             ],
           )),

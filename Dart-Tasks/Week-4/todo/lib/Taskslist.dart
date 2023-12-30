@@ -87,12 +87,12 @@ class _TaskslistState extends State<Taskslist> {
   }
 }
 
-Map<String,List<String>> allTasks = {
+Map<String, List<String>> allTasks = {
   "UX/Ui": ["Description", "8/3/10", 'red'],
   "Reading": ["Description", "8/3/10", 'red'],
   "Study": ["Description", "8/3/10", 'green'],
   "Dart": ["Description", "8/3/10", 'green'],
-  "Dart2": ["Description", "8/3/10",'green'],
+  "Dart2": ["Description", "8/3/10", 'green'],
 };
 
 class TaskWidget extends StatefulWidget {
@@ -101,6 +101,7 @@ class TaskWidget extends StatefulWidget {
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
 }
+
 class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {

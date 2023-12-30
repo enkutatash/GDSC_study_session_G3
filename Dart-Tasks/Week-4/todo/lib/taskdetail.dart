@@ -12,7 +12,7 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
-  double progress = 0;
+      double progress =0;
 
   @override
   Widget build(BuildContext context) {

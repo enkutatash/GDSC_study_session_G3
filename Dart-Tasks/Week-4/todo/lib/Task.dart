@@ -61,7 +61,7 @@ class _TaskState extends State<Task> {
               ),
               Expanded(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       widget.name,
