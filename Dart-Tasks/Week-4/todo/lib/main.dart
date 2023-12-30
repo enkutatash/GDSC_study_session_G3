@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todo/Taskslist.dart';
 //import "package:todo/newTaskForm.dart";
 //import 'package:todo/NewTask.dart';
@@ -44,9 +45,9 @@ class _FrontpageState extends State<Frontpage> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "image/todo.jpg",
-                width: width,
+              Lottie.asset(
+                "image/animation/todoA.json",
+                width: width*0.8,
                 height: height * 0.4,
               ),
               SizedBox(
