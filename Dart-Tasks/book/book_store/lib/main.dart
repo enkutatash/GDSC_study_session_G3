@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:book_store/AnimaPage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:book_store/MainBody.dart';
-
+import 'package:book_store/oneBook.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      //home: const AnimaPage(),
       home: const AnimaPage(),
     );
   }
@@ -38,7 +39,7 @@ class _AnimaPageState extends State<AnimaPage> {
     return Container(
       child: Column(
         children: [
-          Center(child: Lottie.asset("image/animation/baby.json",height: MediaQuery.of(context).size.height*0.3,
+          Center(child: Lottie.asset("image/animation/reading.json",height: MediaQuery.of(context).size.height*0.3,
           width: MediaQuery.of(context).size.width*0.5
           )),
           SizedBox(height: MediaQuery.of(context).size.height*0.4,),

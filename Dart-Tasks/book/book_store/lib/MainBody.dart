@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:book_store/oneBook.dart';
 
 class MainBody extends StatefulWidget {
   const MainBody({super.key});
@@ -258,7 +259,14 @@ class _MainBodyState extends State<MainBody> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset("image/lewel.jpg")),
+                            child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const oneBook();
+                                  }));
+                                },
+                                child: Image.asset("image/lewel.jpg"))),
                       ),
                     ),
                     const Text("Lewel"),
@@ -273,7 +281,14 @@ class _MainBodyState extends State<MainBody> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset("image/themoon.jpg")),
+                            child: GestureDetector(
+                              onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const oneBook();
+                                  }));
+                                },
+                              child: Image.asset("image/themoon.jpg"))),
                       ),
                     ),
                     const Text("Heart"),
@@ -288,7 +303,14 @@ class _MainBodyState extends State<MainBody> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset("image/themoon.jpg")),
+                            child: GestureDetector(
+                              onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const oneBook();
+                                  }));
+                                },
+                              child: Image.asset("image/themoon.jpg"))),
                       ),
                     ),
                     const Text("The moon"),
@@ -304,7 +326,14 @@ class _MainBodyState extends State<MainBody> {
                             borderRadius: BorderRadius.circular(20)),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset("image/thebook.jpg")),
+                            child: GestureDetector(
+                              onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const oneBook();
+                                  }));
+                                },
+                              child: Image.asset("image/thebook.jpg"))),
                       ),
                     ),
                     const Text("The book"),
