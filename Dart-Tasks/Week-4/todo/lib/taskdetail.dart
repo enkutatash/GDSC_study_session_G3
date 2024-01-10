@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/Taskslist.dart';
+import 'package:todo/NewTask.dart';
 
 class Detail extends StatefulWidget {
   final String name, description, duedate, color;
@@ -12,7 +13,7 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
-      double progress =0;
+  double progress = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,39 @@ class _DetailState extends State<Detail> {
         ),
         title: const Text("Task Detail"),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem<String>(
+                  value: 'Edit',
+                  child: Text('Edit'),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'Delete',
+                  child: Text('Delete'),
+                ),
+              ];
+            },
+            onSelected: (String value) {
+              // Handle the selection of the popup menu item
+              if (value == "Edit") {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const NewTask();
+                }));
+              } else if (value == "Delete") {
+                setState(() {
+                  allTasks.remove(widget.name);
+                });
+                   Navigator.pop(context);
+                
+               Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) =>const Taskslist()),
+    );
+                
+              }
+            },
+          ),
         ],
       ),
       body: Padding(
