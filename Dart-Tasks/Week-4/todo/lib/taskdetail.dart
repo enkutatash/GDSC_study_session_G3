@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/Taskslist.dart';
 import 'package:todo/NewTask.dart';
+import 'package:todo/editTask.dart';
 
 class Detail extends StatefulWidget {
   final String name, description, duedate, color;
@@ -50,19 +51,18 @@ class _DetailState extends State<Detail> {
               // Handle the selection of the popup menu item
               if (value == "Edit") {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const NewTask();
+                  return EditTask(widget.name,widget.description,widget.duedate,widget.color);
                 }));
               } else if (value == "Delete") {
                 setState(() {
                   allTasks.remove(widget.name);
                 });
-                   Navigator.pop(context);
-                
-               Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) =>const Taskslist()),
-    );
-                
+                Navigator.pop(context);
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Taskslist()),
+                );
               }
             },
           ),
